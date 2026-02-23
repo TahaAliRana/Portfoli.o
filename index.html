@@ -4,123 +4,404 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 <title>Taha Ali Rana | App & Web Developer</title>
 <style>
-body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#0f172a;color:#fff}
-header{padding:40px;text-align:center;background:#020617}
-header h1{margin:0;font-size:40px}
-header p{opacity:.8}
-nav{display:flex;justify-content:center;gap:20px;margin-top:15px}
-nav a{color:#38bdf8;text-decoration:none;font-weight:bold}
-section{padding:60px 20px;max-width:1000px;margin:auto}
-.projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px}
-.card{background:#020617;padding:20px;border-radius:10px;display:flex;flex-direction:column;align-items:center}
-.card h3{margin-top:0}
-.card video{width:100%;border-radius:10px;margin-bottom:10px;object-fit:cover;}
-.card .btn{margin-top:10px;text-align:center;}
-.contact-buttons{
-display:flex;
-flex-wrap:wrap;
-gap:20px;
-justify-content:center;
-margin-top:25px;
+:root {
+    --primary: #38bdf8;
+    --primary-hover: #0ea5e9;
+    --bg-dark: #0f172a;
+    --bg-card: #1e293b;
+    --text-light: #f1f5f9;
+    --text-gray: #94a3b8;
+    --gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
 }
-/* Ensure all project videos have the same height and scale nicely */
+
+* { box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background: var(--bg-dark);
+    color: var(--text-light);
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--bg-card); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+header {
+    padding: 60px 20px;
+    text-align: center;
+    background: radial-gradient(circle at top, #1e293b 0%, #0f172a 100%);
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZGVmcz48cGF0dGVybiBpZD0iZ3JpZCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIiBwYXR0ZXJuVW5pdHM9InVzZXJTcGFjZU9uVXNlIj48cGF0aCBkPSJNIDQwIDAgTCAwIDAgMCA0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDU5LCAxODMsIDI0OCwgMC4xKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+');
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 3.5rem;
+    background: var(--gradient);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
+    animation: fadeInDown 1s ease-out;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: var(--text-gray);
+    margin-top: 10px;
+    animation: fadeInUp 1s ease-out 0.3s backwards;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin-top: 30px;
+    animation: fadeIn 1s ease-out 0.6s backwards;
+}
+
+nav a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: var(--primary);
+    transition: width 0.3s;
+}
+
+nav a:hover { color: var(--primary); }
+nav a:hover::after { width: 100%; }
+
+section { padding: 80px 20px; max-width: 1200px; margin: auto; }
+
+h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+h2::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: var(--primary);
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+#about p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: var(--text-gray);
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.service-card {
+    background: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: 15px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-color: var(--primary);
+}
+
+.service-card i { font-size: 3rem; color: var(--primary); margin-bottom: 20px; }
+.service-card h3 { margin: 10px 0; font-size: 1.5rem; }
+.service-card p { color: var(--text-gray); font-size: 0.95rem; }
+
+/* Skills Section */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.skill-tag {
+    background: var(--bg-card);
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s;
+}
+
+.skill-tag:hover {
+    background: var(--primary);
+    color: #000;
+    transform: scale(1.05);
+}
+
+.skill-tag i { font-size: 1.2rem; }
+
+/* Projects Section */
+.projects { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+
+.card {
+    background: var(--bg-card);
+    padding: 25px;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+.card:hover { transform: translateY(-5px); border-color: var(--primary); }
+.card h3 { margin: 15px 0 10px; font-size: 1.4rem; }
+
 .card video {
-  width: 100%;         /* full card width */
-  height: 700px;       /* fixed height */
-  object-fit: cover;   /* crop/scale video to fit nicely */
-  border-radius: 10px;
-  margin-bottom: 10px;
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    background: #000;
+    margin-bottom: 15px;
 }
-.btn{
-display:flex;
-align-items:center;
-gap:10px;
-background:#38bdf8;
-color:#000;
-padding:12px 20px;
-border-radius:8px;
-text-decoration:none;
-font-weight:bold;
-transition:all 0.3s ease;
+
+.card p { color: var(--text-gray); text-align: center; margin-bottom: 20px; line-height: 1.6; }
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--gradient);
+    color: #fff;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
-.btn:hover{
-background:#0ea5e9;
-transform:translateY(-3px);
-box-shadow:0 8px 20px rgba(0,0,0,0.4);
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.3);
+    opacity: 0.9;
 }
-.btn i{font-size:18px;}
-footer{text-align:center;padding:30px;background:#020617;margin-top:40px}
+
+#github { text-align: center; background: var(--bg-card); border-radius: 20px; margin-top: 60px; margin-bottom: 60px; }
+
+.contact-buttons { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px; }
+
+footer { text-align: center; padding: 40px; background: #020617; margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.05); }
+footer p { color: var(--text-gray); font-size: 0.9rem; }
+
+@keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.hidden { opacity: 0; transform: translateY(50px); transition: all 1s ease; }
+.show { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 768px) {
+    header h1 { font-size: 2.5rem; }
+    .projects { grid-template-columns: 1fr; }
+    .card video { height: 300px; }
+    nav { gap: 15px; font-size: 0.9rem; }
+}
 </style>
 </head>
 <body>
 
 <header>
-<h1>Taha Ali Rana</h1>
-<p>Flutter App Developer | Web Developer</p>
-<nav>
-<a href="#projects">Projects</a>
-<a href="#github">GitHub</a>
-<a href="#contact">Contact</a>
-</nav>
+    <h1>Taha Ali Rana</h1>
+    <p>Flutter App Developer | Web Developer</p>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
 </header>
 
-<section id="about">
-<h2>About Me</h2>
-<p>I am a passionate App and Web Developer specializing in Flutter mobile application development and modern responsive web applications. I have experience building productivity tools, e‑commerce apps, and utility applications that solve real problems for users. My work focuses on clean UI design, smooth performance, and practical features such as API integration, Firebase services, and cross‑platform deployment for Android and iOS. I enjoy turning ideas into real digital products and helping individuals or businesses bring their applications to life.</p>
+<section id="about" class="hidden">
+    <h2>About Me</h2>
+    <p>I am a passionate App and Web Developer specializing in Flutter mobile application development and modern responsive web applications. I have experience building productivity tools, e-commerce apps, and utility applications that solve real problems for users. My work focuses on clean UI design, smooth performance, and practical features such as API integration, Firebase services, and cross-platform deployment for Android and iOS. I enjoy turning ideas into real digital products and helping individuals or businesses bring their applications to life.</p>
 </section>
 
-<section id="projects">
-<h2>Projects</h2>
-<div class="projects">
-
-<div class="card">
-<h3>StudSkIt App</h3>
-<video controls>
-  <source src="stuskit.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p>Student productivity app with tools like speech-to-text, text-to-speech, QR scanner, translator and event planner.</p>
-<a class="btn" href="https://drive.google.com/file/d/186KMOr-l_FE2CiufOk2gIh88Y2IzpocZ/view?usp=sharing" target="_blank">
-<i class="fas fa-download"></i> Download
-</a>
-</div>
-
-<div class="card">
-<h3>Jewellery Store App</h3>
-<video controls>
-  <source src="output_2x.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
-<p>Ecommerce mobile app with product catalog, cart system, and admin panel.</p>
-<a class="btn" href="https://drive.google.com/file/d/1Q_UUb9XOMJH7H-Ese7gkQQ9pIWPMd2bf/view" target="_blank">
-<i class="fas fa-download"></i> Download
-</a>
-</div>
-
-</div>
+<section id="services" class="hidden">
+    <h2>Services</h2>
+    <div class="services-grid">
+        <div class="service-card">
+            <i class="fab fa-flutter"></i>
+            <h3>Flutter Development</h3>
+            <p>Cross-platform mobile apps for Android & iOS with native-like performance and beautiful UI.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-code"></i>
+            <h3>Web Development</h3>
+            <p>Responsive websites and web applications using modern technologies like HTML, CSS, JavaScript.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-fire"></i>
+            <h3>Firebase Integration</h3>
+            <p>Backend solutions including authentication, real-time database, cloud functions, and analytics.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-shopping-cart"></i>
+            <h3>E-Commerce Solutions</h3>
+            <p>Online stores with cart systems, payment integration, and admin panels for businesses.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-tools"></i>
+            <h3>App Maintenance</h3>
+            <p>Bug fixes, performance optimization, and feature updates for existing applications.</p>
+        </div>
+        <div class="service-card">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <h3>App Deployment</h3>
+            <p>Publishing your apps to Google Play Store and Apple App Store with full guidelines.</p>
+        </div>
+    </div>
 </section>
 
-<section id="github">
-<h2>GitHub</h2>
-<p>View my coding projects and open-source work.</p>
-<a class="btn" href="https://github.com/TahaAliRana" target="_blank"><i class="fab fa-github"></i> Visit GitHub</a>
+<section id="skills" class="hidden">
+    <h2>My Skills</h2>
+    <div class="skills-container">
+        <div class="skill-tag"><i class="fab fa-dart"></i> Dart</div>
+        <div class="skill-tag"><i class="fab fa-flutter"></i> Flutter</div>
+        <div class="skill-tag"><i class="fab fa-html5"></i> HTML5</div>
+        <div class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</div>
+        <div class="skill-tag"><i class="fab fa-js"></i> JavaScript</div>
+        <div class="skill-tag"><i class="fas fa-database"></i> Firebase</div>
+        <div class="skill-tag"><i class="fab fa-git-alt"></i> Git</div>
+        <div class="skill-tag"><i class="fab fa-github"></i> GitHub</div>
+        <div class="skill-tag"><i class="fas fa-mobile-alt"></i> Responsive Design</div>
+        <div class="skill-tag"><i class="fas fa-plug"></i> REST APIs</div>
+    </div>
 </section>
 
-<section id="contact">
-<h2>Contact Me</h2>
-<div class="contact-buttons">
-<a class="btn" href="https://wa.me/923187577423" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-<a class="btn" href="mailto:tahaaalig497@gmail.com"><i class="fas fa-envelope"></i> Email</a>
-<a class="btn" href="https://www.linkedin.com/in/taha-ali-0165a6355/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-<a class="btn" href="tel:+923187577423"><i class="fas fa-phone"></i> Call</a>
-</div>
+<section id="projects" class="hidden">
+    <h2>Projects</h2>
+    <div class="projects">
+        <div class="card">
+            <h3>StudSkIt App</h3>
+            <video controls>
+                <source src="stuskit.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Student productivity app with tools like speech-to-text, text-to-speech, QR scanner, translator and event planner.</p>
+            <a class="btn" href="https://drive.google.com/file/d/186KMOr-l_FE2CiufOk2gIh88Y2IzpocZ/view?usp=sharing" target="_blank">
+                <i class="fas fa-download"></i> Download
+            </a>
+        </div>
+
+        <div class="card">
+            <h3>Jewellery Store App</h3>
+            <video controls>
+                <source src="output_2x.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <p>Ecommerce mobile app with product catalog, cart system, and admin panel.</p>
+            <a class="btn" href="https://drive.google.com/file/d/1Q_UUb9XOMJH7H-Ese7gkQQ9pIWPMd2bf/view" target="_blank">
+                <i class="fas fa-download"></i> Download
+            </a>
+        </div>
+    </div>
+</section>
+
+<section id="github" class="hidden">
+    <h2>GitHub</h2>
+    <p>View my coding projects and open-source work on GitHub.</p>
+    <br>
+    <a class="btn" href="https://github.com/TahaAliRana" target="_blank">
+        <i class="fab fa-github"></i> Visit GitHub
+    </a>
+</section>
+
+<section id="contact" class="hidden">
+    <h2>Contact Me</h2>
+    <p style="text-align: center; color: var(--text-gray);">Feel free to reach out for collaborations or just a friendly chat.</p>
+    <div class="contact-buttons">
+        <a class="btn" href="https://wa.me/923187577423" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+        <a class="btn" href="mailto:tahaaalig497@gmail.com">
+            <i class="fas fa-envelope"></i> Email
+        </a>
+        <a class="btn" href="https://www.linkedin.com/in/taha-ali-0165a6355/" target="_blank">
+            <i class="fab fa-linkedin"></i> LinkedIn
+        </a>
+        <a class="btn" href="tel:+923187577423">
+            <i class="fas fa-phone"></i> Call
+        </a>
+    </div>
 </section>
 
 <footer>
-<p>© 2026 Taha Ali Rana</p>
+    <p>&copy; 2026 Taha Ali Rana. All rights reserved.</p>
+    <div style="margin-top: 15px;">
+        <a href="https://github.com/TahaAliRana" target="_blank" style="color: var(--text-gray); margin: 0 10px;"><i class="fab fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/taha-ali-0165a6355/" target="_blank" style="color: var(--text-gray); margin: 0 10px;"><i class="fab fa-linkedin"></i></a>
+        <a href="https://wa.me/923187577423" target="_blank" style="color: var(--text-gray); margin: 0 10px;"><i class="fab fa-whatsapp"></i></a>
+    </div>
 </footer>
+
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('show');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.hidden').forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
